@@ -1,31 +1,39 @@
 import React, { Component } from 'react';
+import MusicHeader from '../components/MusicHeader';
+import MusicTop20 from '../components/MusicTop20';
 
 class MusicContainer extends Component {
     constructor(props) {
         super(props);
         this.state = { 
             top20Songs: []
-         }
+        }
     }
 
     componentDidMount() {
         const url = 'https://itunes.apple.com/gb/rss/topsongs/limit=20/json'
 
+        // top20Songs: payload.feed.entry[0]
+
         fetch(url)
             .then(res => res.json())
-            .then(top20Songs => this.setState({
-                top20Songs: top20Songs
+            .then(payload => this.setState({
+                top20Songs: payload.map((song.feed.entry[0]) => {
+                    const cleanPayload{
+
+                    }
+                });
             }))
     }
 
     render() { 
+
         return ( 
-            // Header component
-            // pass down title
-            <h2>This is where the magic will happen!</h2>
-            // MusicTop20 component
-            // pass down top20Songs array
-         );
+            <div>
+                <MusicHeader title="iTunes UK Top 20"></MusicHeader>
+                <MusicTop20 top20Songs={this.state.top20Songs}></MusicTop20>
+            </div>
+        );
     }
 }
  
